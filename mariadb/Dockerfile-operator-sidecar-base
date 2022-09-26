@@ -9,20 +9,17 @@ RUN apt-get update \
         apt-transport-https ca-certificates unzip pigz wget gnupg \
     && rm -rf /var/lib/apt/lists/*
 
-RUN echo 'deb https://repo.percona.com/apt buster main' > /etc/apt/sources.list.d/percona.list
-
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        percona-toolkit \
+        default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
+    
+RUN echo 'deb https://repo.percona.com/apt buster main' > /etc/apt/sources.list.d/percona.list
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         percona-xtrabackup-24 \
     && rm -rf /var/lib/apt/lists/*
     
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        default-mysql-client \
-    && rm -rf /var/lib/apt/lists/*
+
     
