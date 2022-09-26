@@ -14,5 +14,13 @@ RUN apt-get update \
         default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
     
+RUN echo 'deb https://repo.percona.com/apt buster main' > /etc/apt/sources.list.d/percona.list
 
+RUN apt-get update
+
+RUN apt-get install -y --no-install-recommends percona-toolkit
+RUN rm -rf /var/lib/apt/lists/*
+
+RUN apt-get install -y --no-install-recommends percona-xtrabackup-24
+RUN rm -rf /var/lib/apt/lists/*
 
