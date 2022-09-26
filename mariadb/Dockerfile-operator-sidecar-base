@@ -14,6 +14,6 @@ RUN echo 'deb https://repo.percona.com/apt buster main' > /etc/apt/sources.list.
 ARG XTRABACKUP_PKG=percona-xtrabackup-24
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        percona-toolkit ${XTRABACKUP_PKG} unzip default-mysql-client \
+        percona-toolkit percona-xtrabackup-24 unzip default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
