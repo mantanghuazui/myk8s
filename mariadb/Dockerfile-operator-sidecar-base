@@ -1,8 +1,11 @@
+
 FROM debian:buster-slim as sidecar
 
 RUN groupadd -g 999 mysql
 RUN useradd -u 999 -r -g 999 -s /sbin/nologin \
     -c "Default Application User" mysql
+
+COPY rootfs/ /
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -25,5 +28,5 @@ RUN echo 'deb https://repo.percona.com/apt buster main' > /etc/apt/sources.list.
 ARG XTRABACKUP_PKG=percona-xtrabackup-24
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        percona-toolkit percona-xtrabackup-24 unzip default-mysql-client \
+        percona-toolkit ${XTRABACKUP_PKG} unzip default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
